@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 createMovie();
             }
         });
-        fab.setEnabled(false);
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         helper.attachToRecyclerView(recyclerView);
     }
     public void createMovie(){
-
+        
     }
 
 }

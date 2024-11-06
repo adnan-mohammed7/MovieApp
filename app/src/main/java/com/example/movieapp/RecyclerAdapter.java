@@ -1,4 +1,6 @@
 package com.example.movieapp;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +72,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 .into(viewHolder.imageViewer);
         viewHolder.title.setText(movie.getTitle());
         viewHolder.year.setText(String.valueOf(movie.getYear()));
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, MovieDetails.class);
+                intent.putExtra("title", movie.getTitle());
+                intent.putExtra("year", movie.getYear());
+                intent.putExtra("id", movie.getImdbID());
+                intent.putExtra("type", movie.getType());
+                intent.putExtra("url", movie.getPosterUrl());
+
+                context.startActivity(intent);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

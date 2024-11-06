@@ -1,16 +1,23 @@
 package com.example.movieapp;
 
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<Movie> list = new ArrayList<>(Arrays.asList(
+    private ArrayList<Movie> movies = new ArrayList<>(Arrays.asList(
             new Movie("Bodyguard", 2011, "m001", "Movie", "https://upload.wikimedia.org/wikipedia/en/a/af/Bodyguard_poster.jpg"),
-            new Movie("Ready", 2011, "m002", "Movie", "https://en.wikipedia.org/wiki/Ready_%282011_film%29#/media/File:Salman-Asin-Ready.jpg"),
+            new Movie("Ready", 2011, "m002", "Movie", "https://i.imgur.com/F7pr997.jpeg"),
             new Movie("Veer", 2010, "m003", "Movie", "https://example.com/veer.jpg"),
             new Movie("Kick", 2014, "m004", "Movie", "https://example.com/kick.jpg"),
             new Movie("Ek Tha Tiger", 2012, "m005", "Movie", "https://example.com/ekthtiger.jpg"),
@@ -21,9 +28,27 @@ public class MainActivity extends AppCompatActivity {
             new Movie("Sultan", 2016, "m010", "Movie", "https://example.com/sultan.jpg")
     ));
 
+    private RecyclerView recyclerView;
+    private RecyclerAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        recyclerView = findViewById(R.id.display);
+        adapter = new RecyclerAdapter(movies);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        FloatingActionButton fab = findViewById(R.id.add_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createMovie();
+            }
+        });
     }
+    public void createMovie(){
+
+    }
+
 }

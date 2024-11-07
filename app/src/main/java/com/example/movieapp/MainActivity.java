@@ -2,25 +2,19 @@ package com.example.movieapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<Movie> movies = new ArrayList<>(Arrays.asList(
+    private final ArrayList<Movie> movies = new ArrayList<>(Arrays.asList(
             new Movie("Bodyguard", 2011, "m001", "Movie", "https://i.imgur.com/vranu8L.jpeg"),
             new Movie("Ready", 2011, "m002", "Movie", "https://i.imgur.com/xwNE49d.jpeg"),
             new Movie("Veer", 2010, "m003", "Movie", "https://i.imgur.com/rVPdBqe.jpeg"),
@@ -33,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
             new Movie("Sultan", 2016, "m010", "Movie", "https://i.imgur.com/PvjX7F0.jpeg")
     ));
 
-    private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
     ActivityResultLauncher<Intent> resultLauncher;
 
@@ -41,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.display);
+        RecyclerView recyclerView = findViewById(R.id.display);
         adapter = new RecyclerAdapter(movies);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -53,14 +46,12 @@ public class MainActivity extends AppCompatActivity {
                 movies.add((Movie) input.getSerializableExtra("movie"));
 
                 adapter.notifyItemInserted(movies.size() - 1);
+                recyclerView.scrollToPosition(movies.size() - 1);
             }
         });
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        fab.setOnClickListener(e-> {
                 createMovie();
-            }
         });
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override

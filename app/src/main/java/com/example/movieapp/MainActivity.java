@@ -1,8 +1,11 @@
 package com.example.movieapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
+    ActivityResultLauncher<Intent> resultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FloatingActionButton fab = findViewById(R.id.add_fab);
+
+        resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result ->{
+            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                Intent input = result.getData();
+                movies.add((Movie) input.getSerializableExtra("movie"));
+
+                adapter.notifyItemInserted(movies.size() - 1);
+            }
+        });
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
         helper.attachToRecyclerView(recyclerView);
     }
     public void createMovie(){
-        
+        Intent intent = new Intent(this, NewMovie.class);
+        resultLauncher.launch(intent);
     }
 
 }

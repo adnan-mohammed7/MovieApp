@@ -2,4 +2,8 @@
     <string name="app_name">Movie App</string>
     <string name="fab_description">Add New Movie</string>
     <string name="image">image</string>
+    <string name="poster_url">Poster-URL</string>
+    <string name="imdb_id">IMDB ID</string>
+    <string name="title">Title</string>
+    <string name="add_movie">Add Movie</string>
 </resources>

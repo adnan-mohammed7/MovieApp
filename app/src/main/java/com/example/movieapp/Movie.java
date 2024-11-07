@@ -1,6 +1,8 @@
 package com.example.movieapp;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
     String title;
     int year;
     String imdbID;

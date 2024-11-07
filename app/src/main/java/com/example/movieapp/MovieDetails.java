@@ -38,7 +38,7 @@ public class MovieDetails extends AppCompatActivity {
                 .into(imageView);
 
         String title = "Title: " + intent.getStringExtra("title");
-        String year = "Year: " + String.valueOf(intent.getIntExtra("year", 0));
+        String year = "Year: " + intent.getIntExtra("year", 0);
         String id = "imdbID: " + intent.getStringExtra("id");
         String type = "Type: " + intent.getStringExtra("type");
 

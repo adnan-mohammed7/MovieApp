@@ -73,10 +73,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         viewHolder.title.setText(movie.getTitle());
         viewHolder.year.setText(String.valueOf(movie.getYear()));
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
+        viewHolder.itemView.setOnClickListener(e -> {
+                Context context = e.getContext();
                 Intent intent = new Intent(context, MovieDetails.class);
                 intent.putExtra("title", movie.getTitle());
                 intent.putExtra("year", movie.getYear());
@@ -85,7 +83,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 intent.putExtra("url", movie.getPosterUrl());
 
                 context.startActivity(intent);
-            }
         });
     }
 

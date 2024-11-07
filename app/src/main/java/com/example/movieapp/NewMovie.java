@@ -2,20 +2,11 @@ package com.example.movieapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import java.util.Date;
 
 public class NewMovie extends AppCompatActivity {
 
@@ -32,9 +23,7 @@ public class NewMovie extends AppCompatActivity {
 
 
         Button submitBtn = findViewById(R.id.new_submit_btn);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        submitBtn.setOnClickListener(e -> {
                 String title = titleInput.getText().toString().trim();
                 int year = Integer.parseInt(yearInput.getSelectedItem().toString());
                 String id = idInput.getText().toString().trim();
@@ -48,7 +37,6 @@ public class NewMovie extends AppCompatActivity {
                 intent.putExtra("movie", movie);
                 setResult(RESULT_OK, intent);
                 finish();
-            }
         });
     }
 }
